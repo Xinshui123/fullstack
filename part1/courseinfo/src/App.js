@@ -38,22 +38,29 @@ const Content = (props) => {
 
 const Total = (props) => {
 
-  const total = props.total
-
-  function sum(arry) {
-    let t = 0
-    arry.forEach(
-      (value) => {
-        t += value.exercises;
-      }
-    )
-    return t
-  }
+  //const total = props.total
+  // function sum(arry) {
+  //   let t = 0
+  //   arry.forEach(
+  //     (value) => {
+  //       t += value.exercises;
+  //     }
+  //   )
+  //   return t
+  // }
 
   return (
     <div>
       <p>
-        Total is {sum(total)}
+        Total is {(total) => {
+          let t = 0
+          total.forEach(
+            (value) => {
+              t += value.exercises;
+            }
+          )
+          return t
+        }}
       </p>
     </div>
   )

@@ -9,6 +9,19 @@ const Header = (props) => {
   )
 }
 
+const Part = (props) => {
+  const name = props.name
+  const num = props.num
+
+  return (
+    <div>
+      <p>
+        {name},{num}
+      </p>
+    </div>
+  )
+}
+
 const Content = (props) => {
 
   const name1 = props.name1
@@ -18,21 +31,11 @@ const Content = (props) => {
   const num2 = props.num2
   const num3 = props.num3
 
-  const Part = (props) => {
-    const names = names
-    const nums = nums
-    <div>
-          <p>
-      {names},{nums}
-    </p>
-    </div>
-
-  }
   return (
     <div>
-      <Part name = {name1} num = {num1} />
-      <Part name = {name2} num = {num2} />
-      <Part name = {name3} num = {num3} />
+      <Part name={name1} num={num1} />
+      <Part name={name2} num={num2} />
+      <Part name={name3} num={num3} />
     </div>
   )
 }

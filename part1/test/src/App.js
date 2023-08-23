@@ -23,7 +23,6 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
-
 const App = () => {
   //const [counter, setCounter] = useState(0)
   // setTimeout(

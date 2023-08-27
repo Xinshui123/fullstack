@@ -45,7 +45,8 @@ const App = () => {
       ]
     }
   ]
-  // console.log(courses[1])
+
+
   return (
     <div>
       <ul>

@@ -1,4 +1,6 @@
+
 const CountryInfo = ({ country }) => {
+
     const languages = Object.values(country[0].languages);
 
     return (
@@ -13,8 +15,8 @@ const CountryInfo = ({ country }) => {
             < ul >
                 {languages.map(c => <li key={c}>{c}</li>)}
             </ul>
-            <img src={country[0].flags.png}></img>
-        </div>
+            <img src={country[0].flags.png} alt="national flag"></img>
+        </div >
     )
 }
 

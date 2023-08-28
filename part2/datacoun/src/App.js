@@ -10,14 +10,16 @@ const App = () => {
   const [show, setShow] = useState(false)
 
   useEffect(() => {
-    console.log('effect')
+    console.log('country')
     axios
       .get('https://restcountries.com/v3.1/all')
       .then(response => {
-        console.log('promise fulfilled')
+        console.log('country promise fulfilled')
         findCountry(response.data)
       })
   }, [])
+
+
 
   const handleChange = (event) => {
     setSearch(event.target.value)

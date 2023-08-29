@@ -4,14 +4,14 @@
       "id": 1,
       "content": "HTML is easy",
       "date": "2022-1-17T17:30:31.098Z",
-      "important": false,
+      "important": true,
       "import": false
     },
     {
       "id": 2,
       "content": "Browser can execute only JavaScript",
       "date": "2022-1-17T18:39:34.091Z",
-      "important": true
+      "important": false
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
     },
     {
       "content": "qrfedfgvrg",
-      "important": true,
+      "important": false,
       "id": 4
     },
     {
@@ -38,7 +38,7 @@
     },
     {
       "content": "xzcsz",
-      "important": false,
+      "important": true,
       "id": 7,
       "import": false
     },
@@ -60,7 +60,7 @@
     },
     {
       "content": "kljkljkljk",
-      "important": false,
+      "important": true,
       "id": 11
     },
     {
@@ -70,7 +70,7 @@
     },
     {
       "content": "",
-      "important": false,
+      "important": true,
       "id": 13
     },
     {
@@ -85,7 +85,7 @@
     },
     {
       "content": "f vc cvxcv",
-      "important": false,
+      "important": true,
       "id": 16
     },
     {
@@ -95,12 +95,12 @@
     },
     {
       "content": "cxvxee",
-      "important": false,
+      "important": true,
       "id": 18
     },
     {
       "content": "",
-      "important": false,
+      "important": true,
       "id": 19
     },
     {

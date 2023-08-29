@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import PersonShow from './components/PersonShow'
+import personService from './services/Persons'
 
 const App = () => {
 
@@ -10,17 +10,20 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [search, setSearch] = useState('')
+  // const [delId, setDel] = useState(null)
 
   useEffect(() => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        console.log('promise fulfilled')
-        setPersons(response.data)
+    personService
+      .getAll()
+      .then(initialPersons => {
+        console.log(initialPersons)
+        setPersons(initialPersons)
       })
   }, [])
 
+  // const handledel = (props) => {
+  //   setDel(person.id)
+  // }
   const handleChange = (event) => {
     setSearch(event.target.value)
   }
@@ -37,16 +40,50 @@ const App = () => {
       name: newName,
       number: newNumber,
       id: persons.length + 1,
-      import: false,
     }
-    setPersons(persons.concat(newObject))
-    setNewName('')
-    setNewNumber('')
+
+    const nameExists = persons.find(person => person.name === newName)
+    if (nameExists) {
+      if (window.confirm(`${newName} had already in the PhoneBook, replace the old number with the new one?`)) {
+        personService
+          .update(nameExists.id, newName, newNumber)
+          .then(updatedPerson => {
+            // 找到persons中要更新项的索引
+            const index = persons.findIndex(p => p.id === updatedPerson.id);
+            // 创建一个新的数组拷贝
+            const newPersons = [...persons];
+            // 在拷贝中更新指定索引项
+            newPersons[index] = updatedPerson;
+            // 设置状态为新数组以更新组件
+            setPersons(newPersons);
+            setNewName('')
+            setNewNumber('')
+          })
+      }
+    } else {
+      personService
+        .create(newObject)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setNewName('')
+          setNewNumber('')
+        })
+    }
   }
-  const nameExists = persons.find(person => person.name === newName)
-  if (nameExists) {
-    alert(`${newName} is already added to phonebook`)
+
+  const deletePerson = (id) => {
+    const person = persons.find(p => p.id === id)
+    if (window.confirm(`Delete ${person.name}?`)) {
+      console.log(persons.find(p => p.id === id).name)
+      personService
+        .delPerson(id)
+        .then(response => {
+          setPersons(persons.filter(p => p.id !== id))
+        })
+    }
   }
+
+
 
   const filtered = search
     ? persons.filter(p => p.name.toLowerCase().includes(search.toLowerCase()))
@@ -72,6 +109,7 @@ const App = () => {
       <h2>Numbers</h2>
       <PersonShow
         persons={filtered}
+        onDelete={deletePerson}
       />
     </div>
   )

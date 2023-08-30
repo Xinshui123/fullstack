@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import PersonShow from './components/PersonShow'
+import Notification from './components/Notification'
 import personService from './services/Persons'
 
 const App = () => {
@@ -10,7 +11,9 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [search, setSearch] = useState('')
-  // const [delId, setDel] = useState(null)
+  const [NotificationShow, setNotiShow] = useState(true)
+  const [notificationData, setNotificationData] = useState('') // Store notification data
+
 
   useEffect(() => {
     personService
@@ -21,9 +24,6 @@ const App = () => {
       })
   }, [])
 
-  // const handledel = (props) => {
-  //   setDel(person.id)
-  // }
   const handleChange = (event) => {
     setSearch(event.target.value)
   }
@@ -58,6 +58,11 @@ const App = () => {
             setPersons(newPersons);
             setNewName('')
             setNewNumber('')
+            setNotiShow(false)
+            setTimeout(() => {
+              setNotiShow(true)
+            }, 1000)
+            setNotificationData(newName);
           })
       }
     } else {
@@ -65,8 +70,14 @@ const App = () => {
         .create(newObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
-          setNewName('')
-          setNewNumber('')
+          setNewName('');
+          setNewNumber('');
+          setNotiShow(false);
+          console.log('123')
+          setTimeout(() => {
+            setNotiShow(true)
+          }, 1000);
+          setNotificationData(newName);
         })
     }
   }
@@ -93,6 +104,10 @@ const App = () => {
 
   return (
     <div>
+      <Notification
+        message={notificationData}
+        isShow={NotificationShow} />
+      {newName}
       <h2>Phonebook</h2>
       <Filter
         search={search}
